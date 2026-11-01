@@ -21,6 +21,7 @@ export function LeadStory({ article }: { article: ArticleCardType }) {
             height={article.featuredImage.height ?? 675}
             className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             loading="eager"
+            {...({ fetchPriority: 'high' } as Record<string, unknown>)}
           />
         ) : (
           <div className="aspect-[16/9] w-full bg-paper-dark" />
