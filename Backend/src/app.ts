@@ -104,11 +104,15 @@ export function createApp() {
   app.use('/media', express.static(path.resolve(__dirname, '..', env.UPLOAD_DIR), {
     maxAge: '30d',
     immutable: false,
-    setHeaders: (res) => {
-      res.setHeader('Cache-Control', 'public, max-age=2592000');
+    setHeaders: (res, filePath) => {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+      res.setHeader('Expires', new Date(Date.now() + 2592000000).toUTCString());
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Vary', 'Origin');
       res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+      if (filePath && filePath.endsWith('.svg')) {
+        res.setHeader('Content-Type', 'image/svg+xml');
+      }
     },
   }));
 
@@ -116,7 +120,18 @@ export function createApp() {
     // Serve the built SPA with server-side metadata injection.
     // Backend/src → Backend → repo root → Frontend/dist
     const distDir = process.env.FRONTEND_DIST_DIR ?? path.resolve(__dirname, '..', '..', 'Frontend', 'dist');
-    app.use(express.static(distDir, { index: false, maxAge: '1h' }));
+    app.use(express.static(distDir, {
+      index: false,
+      maxAge: '1d',
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          res.setHeader('Expires', new Date(Date.now() + 31536000000).toUTCString());
+        }
+      },
+    }));
     app.get('*', renderWithMeta);
   }
 

@@ -5,6 +5,7 @@ import { adminApi } from '../../infrastructure/api/repositories';
 import { Button, Spinner } from '../../presentation/primitives';
 import { MediaLibraryModal } from './MediaLibraryModal';
 import { convertAllToWebP } from '../../infrastructure/adapters/webp';
+import { mediaUrl } from '../../app/config/site';
 
 /**
  * A settings field that stores a media-library URL (logo, favicon, …):
@@ -50,7 +51,7 @@ export function MediaUrlField({
         >
           {value ? (
             <>
-              <img src={value} alt={label} className="absolute inset-0 size-full object-contain p-1.5" />
+              <img src={mediaUrl(value)} alt={label} className="absolute inset-0 size-full object-contain p-1.5" />
               <button
                 type="button"
                 onClick={() => onChange('')}
