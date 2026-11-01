@@ -335,8 +335,14 @@ export function Header() {
 
         {/* Center: wordmark or uploaded logo */}
         <Link to="/" className="group justify-self-center text-center">
-          {!useNativeWordmark && logoUrl ? (
-            <img src={logoUrl} alt={SITE_NAME} className="mx-auto h-12 w-auto object-contain md:h-16 lg:h-20" onError={() => setLogoFailed(true)} />
+          {!useNativeWordmark && logoUrl && !logoFailed ? (
+            <img
+              src={logoUrl}
+              alt={SITE_NAME}
+              className="mx-auto h-12 w-auto object-contain md:h-16 lg:h-20"
+              onError={() => setLogoFailed(true)}
+              onLoad={() => setLogoFailed(false)}
+            />
           ) : (
             <>
               <span className="font-serif text-[1.4rem] font-bold leading-none tracking-tight text-ink-950 md:text-3xl lg:text-4xl">
