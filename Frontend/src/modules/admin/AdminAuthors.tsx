@@ -1,3 +1,4 @@
+import { mediaUrl } from '../../app/config/site';
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { adminApi, publicApi } from '../../infrastructure/api/repositories';
@@ -66,7 +67,7 @@ export default function AdminAuthors() {
           <div key={a.id} className="border border-rule-dark bg-white p-4">
             <div className="flex items-center gap-3">
               {a.avatarUrl ? (
-                <img src={a.avatarUrl} alt="" className="size-12 rounded-full object-cover" />
+                <img src={mediaUrl(a.avatarUrl)} alt="" className="size-12 rounded-full object-cover" />
               ) : (
                 <div className="flex size-12 items-center justify-center rounded-full bg-ink-950 font-serif text-xl font-bold text-paper">{a.name.charAt(0)}</div>
               )}
@@ -98,7 +99,7 @@ export default function AdminAuthors() {
                 <div className="relative size-16 shrink-0 rounded-full border border-rule bg-[repeating-conic-gradient(#f5f5f4_0%_25%,#ffffff_0%_50%)] bg-[length:10px_10px]">
                   {editing.avatarUrl ? (
                     <>
-                      <img src={editing.avatarUrl} alt="Avatar preview" className="absolute inset-0 size-full rounded-full object-cover" />
+                      <img src={mediaUrl(editing.avatarUrl)} alt="Avatar preview" className="absolute inset-0 size-full rounded-full object-cover" />
                       <button type="button" onClick={() => setEditing({ ...editing, avatarUrl: '' })} className="absolute -right-1 -top-1 z-10 rounded-full bg-ink-950 p-0.5 text-paper hover:bg-red-700" aria-label="Remove avatar">
                         <X className="size-3" />
                       </button>

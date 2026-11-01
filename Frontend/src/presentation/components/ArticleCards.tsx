@@ -1,3 +1,4 @@
+import { mediaUrl } from '../../app/config/site';
 import { Link } from 'react-router-dom';
 import type { ArticleCard as ArticleCardType } from '../../domain/entities';
 import { Badge } from '../primitives';
@@ -14,7 +15,7 @@ export function LeadStory({ article }: { article: ArticleCardType }) {
       <Link to={`/articles/${article.slug}`} className="block overflow-hidden">
         {article.featuredImage ? (
           <img
-            src={article.featuredImage.url}
+            src={mediaUrl(article.featuredImage.url)}
             alt={article.imageAlt ?? article.title}
             width={article.featuredImage.width ?? 1200}
             height={article.featuredImage.height ?? 675}
@@ -64,7 +65,7 @@ export function StoryCard({ article }: { article: ArticleCardType }) {
       <Link to={`/articles/${article.slug}`} className="block overflow-hidden">
         {article.featuredImage ? (
           <img
-            src={article.featuredImage.url}
+            src={mediaUrl(article.featuredImage.url)}
             alt={article.imageAlt ?? article.title}
             width={article.featuredImage.width ?? 800}
             height={article.featuredImage.height ?? 450}
@@ -114,7 +115,7 @@ export function ArticleByline({ article, compact = false }: { article: ArticleCa
   return (
     <div className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-500 ${compact ? 'mt-2' : 'mt-4'}`}>
       {article.author?.avatarUrl && (
-        <img src={article.author.avatarUrl} alt="" className="size-6 rounded-full object-cover" loading="lazy" />
+        <img src={mediaUrl(article.author.avatarUrl)} alt="" className="size-6 rounded-full object-cover" loading="lazy" />
       )}
       <Link to={`/authors/${article.author?.slug ?? ''}`} className="font-semibold text-ink-700 hover:text-gold-700">
         {article.author?.name ?? 'Staff'}

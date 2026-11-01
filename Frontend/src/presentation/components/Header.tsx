@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, Search, X, ChevronRight, CloudSun, Calendar, MapPin } from 'lucide-react';
 import { cachedSettings, useCategories, usePublicSettings, useSearch } from '../../application/hooks/usePublicData';
-import { SITE_NAME } from '../../app/config/site';
+import { SITE_NAME, mediaUrl } from '../../app/config/site';
 import { useDebounced } from '../../application/hooks/useDebounced';
 
 function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -337,7 +337,7 @@ export function Header() {
         <Link to="/" className="group justify-self-center text-center">
           {!useNativeWordmark && logoUrl && !logoFailed ? (
             <img
-              src={logoUrl}
+              src={mediaUrl(logoUrl)}
               alt={SITE_NAME}
               className="mx-auto h-12 w-auto object-contain md:h-16 lg:h-20"
               onError={() => setLogoFailed(true)}

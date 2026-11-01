@@ -1,3 +1,4 @@
+import { mediaUrl } from '../../app/config/site';
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { adminApi } from '../../infrastructure/api/repositories';
@@ -69,7 +70,7 @@ export default function AdminMedia() {
           {items.map((m) => (
             <div key={m.id} className="border border-rule-dark bg-white">
               {m.mimeType.startsWith('image/') ? (
-                <img src={m.url} alt={m.altText ?? ''} className="aspect-[4/3] w-full object-cover" loading="lazy" />
+                <img src={mediaUrl(m.url)} alt={m.altText ?? ''} className="aspect-[4/3] w-full object-cover" loading="lazy" />
               ) : (
                 <div className="flex aspect-[4/3] items-center justify-center bg-paper-dark text-sm text-ink-500">{m.mimeType}</div>
               )}

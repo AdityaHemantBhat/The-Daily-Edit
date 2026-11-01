@@ -1,3 +1,4 @@
+import { mediaUrl } from '../../app/config/site';
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ImagePlus, X } from 'lucide-react';
@@ -106,7 +107,7 @@ export function MediaLibraryModal({
                   className="border border-rule text-left transition-colors hover:border-ink-900"
                 >
                   {m.mimeType.startsWith('image/') ? (
-                    <img src={m.url} alt={m.altText ?? ''} className="aspect-[4/3] w-full object-cover" loading="lazy" />
+                    <img src={mediaUrl(m.url)} alt={m.altText ?? ''} className="aspect-[4/3] w-full object-cover" loading="lazy" />
                   ) : (
                     <div className="flex aspect-[4/3] items-center justify-center bg-paper-dark text-[0.6rem] text-ink-400">{m.mimeType}</div>
                   )}

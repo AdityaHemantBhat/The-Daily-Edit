@@ -5,6 +5,7 @@ import { adminApi } from '../../infrastructure/api/repositories';
 import { Button, Spinner } from '../../presentation/primitives';
 import { convertAllToWebP } from '../../infrastructure/adapters/webp';
 import { MediaLibraryModal } from './MediaLibraryModal';
+import { mediaUrl as resolveMediaUrl } from '../../app/config/site';
 
 /**
  * Featured-image picker for the article editor: shows a live preview,
@@ -46,7 +47,7 @@ export function MediaPicker({
       {/* Live preview */}
       {mediaUrl ? (
         <div className="relative mb-3 overflow-hidden rounded border border-rule-dark">
-          <img src={mediaUrl} alt={altText || 'Featured image preview'} className="aspect-[16/9] w-full object-cover" />
+          <img src={resolveMediaUrl(mediaUrl)} alt={altText || 'Featured image preview'} className="aspect-[16/9] w-full object-cover" />
           <button
             type="button"
             onClick={() => onChange(null)}

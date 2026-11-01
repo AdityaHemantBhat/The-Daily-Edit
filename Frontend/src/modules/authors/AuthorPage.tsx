@@ -1,3 +1,4 @@
+import { mediaUrl } from '../../app/config/site';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthor } from '../../application/hooks/usePublicData';
@@ -20,7 +21,7 @@ export function AuthorPage() {
     <div className="mx-auto max-w-7xl px-4 py-10">
       <header className="flex flex-col items-start gap-6 border-b-2 border-ink-900 pb-10 sm:flex-row sm:items-center">
         {author.avatarUrl ? (
-          <img src={author.avatarUrl} alt={author.name} className="size-24 rounded-full object-cover" />
+          <img src={mediaUrl(author.avatarUrl)} alt={author.name} className="size-24 rounded-full object-cover" />
         ) : (
           <div className="flex size-24 items-center justify-center rounded-full bg-ink-950 font-serif text-4xl font-bold text-paper">
             {author.name.charAt(0)}

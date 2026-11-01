@@ -5,7 +5,7 @@ import { Footer } from '../components/Footer';
 import { NewsletterForm } from '../components/NewsletterForm';
 import { usePublicSettings } from '../../application/hooks/usePublicData';
 import { scrollToTop, useSmoothScroll } from '../animations/motion';
-import { SITE_NAME } from '../../app/config/site';
+import { SITE_NAME, mediaUrl } from '../../app/config/site';
 import { setPageMeta } from '../../application/services/seo';
 
 function AnnouncementStrip() {
@@ -45,7 +45,7 @@ export function MainLayout() {
         link.rel = 'icon';
         document.head.appendChild(link);
       }
-      link.href = favicon;
+      link.href = mediaUrl(favicon);
     }
   }, [settings?.site?.faviconUrl]);
 

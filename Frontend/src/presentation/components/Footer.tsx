@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { cachedSettings, useCategories, usePublicSettings, useTools } from '../../application/hooks/usePublicData';
-import { SITE_NAME } from '../../app/config/site';
+import { SITE_NAME, mediaUrl } from '../../app/config/site';
 
 const LEGAL_LINKS = [
   ['/about', 'About Us'],
@@ -42,7 +42,7 @@ export function Footer() {
             </Link>
           ) : (
             <Link to="/">
-              <img src={logoUrl!} alt={SITE_NAME} className="h-11 w-auto" />
+              <img src={mediaUrl(logoUrl!)} alt={SITE_NAME} className="h-11 w-auto" />
             </Link>
           )}
           <p className="mt-3 text-sm leading-relaxed text-ink-500">

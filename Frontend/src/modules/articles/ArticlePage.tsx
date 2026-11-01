@@ -11,7 +11,7 @@ import { Alert, Badge, Container, Skeleton } from '../../presentation/primitives
 import { articleJsonLd, breadcrumbJsonLd, setPageMeta } from '../../application/services/seo';
 import { formatDate, formatDateTime, readingTimeLabel } from '../../domain/value-objects/format';
 import { publicApi } from '../../infrastructure/api/repositories';
-import { SITE_URL } from '../../app/config/site';
+import { SITE_URL, mediaUrl } from '../../app/config/site';
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -222,7 +222,7 @@ export function ArticlePage() {
             {article.featuredImage && (
               <figure className="mt-8">
                 <img
-                  src={article.featuredImage.url}
+                  src={mediaUrl(article.featuredImage.url)}
                   alt={article.imageAlt ?? article.featuredImage.altText ?? article.title}
                   width={article.featuredImage.width ?? 1200}
                   height={article.featuredImage.height ?? 675}
