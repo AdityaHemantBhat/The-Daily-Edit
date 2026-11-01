@@ -27,3 +27,12 @@ if (!parsed.success) {
 
 export const env = parsed.data;
 export const isProd = env.NODE_ENV === 'production';
+
+// Normalize URL-typed env vars: strip trailing slashes so values like
+// "https://site.com/" still match browser origins ("https://site.com") —
+// an exact-match CORS failure here silently blocks the whole frontend.
+env.CORS_ORIGIN = env.CORS_ORIGIN
+  .split(',')
+  .map((o) => o.trim().replace(/\/+$/, ''))
+  .join(',');
+env.SITE_URL = env.SITE_URL.trim().replace(/\/+$/, '');
