@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink-950: #0c0a09;
+  --color-ink-900: #1c1917;
+  --color-ink-700: #44403c;
+  --color-ink-500: #78716c;
+  --color-ink-400: #a8a29e;
+
+  --color-paper: #fafaf9;
+  --color-paper-dark: #f5f5f4;
+
+  --color-gold-700: #8a5005;
+  --color-gold-600: #a16207;
+  --color-gold-100: #fef3c7;
+
+  --color-rule: #e7e5e4;
+  --color-rule-dark: #d6d3d1;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  @apply bg-paper text-ink-950 font-sans antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Modern Ultra-Clean Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3d1 transparent;
+}
+
+.prose-editorial h2, .prose-editorial h3 {
+  scroll-margin-top: 100px;
+}
+.prose-editorial {
+  @apply text-[0.95rem] leading-[1.75] text-ink-900 sm:text-[1.075rem] sm:leading-[1.85];
+  }
+.prose-editorial h2 {
+  @apply font-serif text-[1.5rem] sm:text-[1.9rem] font-semibold leading-tight mt-10 mb-4 text-ink-950;
+  scroll-margin-top: 100px;
+}
+.prose-editorial h3 {
+  @apply font-serif text-[1.2rem] sm:text-[1.45rem] font-semibold mt-8 mb-3 text-ink-950;
+  scroll-margin-top: 100px;
+}
+.prose-editorial p {
+  @apply mb-6;
+}
+.prose-editorial a {
+  @apply text-gold-700 underline decoration-gold-600/40 underline-offset-4 hover:decoration-gold-600;
+}
+.prose-editorial strong {
+  @apply font-semibold text-ink-950;
+}
+.prose-editorial blockquote {
+  @apply border-l-4 border-gold-600 pl-6 my-8 font-serif text-[1.35rem] italic leading-relaxed text-ink-700;
+}
+.prose-editorial ul {
+  @apply list-disc pl-6 mb-6 space-y-2;
+}
+.prose-editorial ol {
+  @apply list-decimal pl-6 mb-6 space-y-2;
+}
+.prose-editorial img {
+  @apply rounded-sm my-8 w-full;
+}
+.prose-editorial figcaption {
+  @apply text-sm text-ink-500 mt-2 mb-8;
+}
+.prose-editorial pre {
+  @apply bg-ink-950 text-[#e7e5e4] rounded-md p-5 overflow-x-auto text-sm my-8 font-mono;
+}
+.prose-editorial code {
+  @apply font-mono text-[0.92em];
+}
+.prose-editorial :not(pre) > code {
+  @apply bg-paper-dark border border-rule px-1.5 py-0.5 rounded;
+}
+.prose-editorial table {
+  @apply w-full text-left border-collapse my-8 text-[0.95rem];
+}
+.prose-editorial th {
+  @apply border-b-2 border-ink-900 pb-2 pr-4 font-semibold;
+}
+.prose-editorial td {
+  @apply border-b border-rule py-3 pr-4 align-top;
+}
+.prose-editorial hr {
+  @apply my-10 border-rule;
+}
+
+/* ---- Custom editorial scrollbar ---- */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3d1 transparent;
+}
+
+/* WebKit / Chromium / Edge */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6d3d1;
+  border-radius: 8px;
+  border: 2px solid #fafaf9; /* creates the inset "floating" look against the paper bg */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a29e;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #a16207;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Compact variant used inside scroll panes (TOC, previews, tables) */
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background-color: #d6d3d1;
+  border-radius: 8px;
+  border: none;
+}
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a29e;
+}
+
+/* Dark admin login / announcement areas: flip the thumb so it stays visible */
+.bg-ink-950 ::-webkit-scrollbar-thumb,
+.bg-ink-950::-webkit-scrollbar-thumb {
+  background-color: #44403c;
+  border-color: #0c0a09;
+}
+.bg-ink-950 ::-webkit-scrollbar-thumb:hover {
+  background-color: #78716c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
