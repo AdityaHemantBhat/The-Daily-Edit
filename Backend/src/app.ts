@@ -39,6 +39,7 @@ export function createApp() {
   app.disable('x-powered-by');
 
   app.use(helmet({
+    crossOriginResourcePolicy: false,
     contentSecurityPolicy: isProd
       ? {
           directives: {
@@ -97,9 +98,18 @@ export function createApp() {
   });
 
   // Uploaded media (dev serves via the Vite proxy; prod directly).
+  // Explicit Cache-Control via setHeaders (some proxies drop maxAge) and a
+  // public CORS header so cross-origin <img> loads from the frontend host
+  // never get blocked.
   app.use('/media', express.static(path.resolve(__dirname, '..', env.UPLOAD_DIR), {
     maxAge: '30d',
     immutable: false,
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'public, max-age=2592000');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Vary', 'Origin');
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    },
   }));
 
   if (isProd) {

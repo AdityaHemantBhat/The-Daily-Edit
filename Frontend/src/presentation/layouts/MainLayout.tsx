@@ -5,8 +5,23 @@ import { Footer } from '../components/Footer';
 import { NewsletterForm } from '../components/NewsletterForm';
 import { usePublicSettings } from '../../application/hooks/usePublicData';
 import { scrollToTop, useSmoothScroll } from '../animations/motion';
-import { SITE_NAME, mediaUrl } from '../../app/config/site';
+import { SITE_NAME, SOCKET_URL, mediaUrl } from '../../app/config/site';
 import { setPageMeta } from '../../application/services/seo';
+
+// Split deployments serve media/socket from the API origin — hint the browser
+// to open the connection early. No-op when API is same-origin.
+function useApiPreconnect() {
+  useEffect(() => {
+    for (const origin of [...new Set([SOCKET_URL, import.meta.env.VITE_API_URL ? new URL(import.meta.env.VITE_API_URL).origin : ''])]) {
+      if (!origin.startsWith('http') || new URL(origin).origin === window.location.origin) continue;
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = origin;
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    }
+  }, []);
+}
 
 function AnnouncementStrip() {
   const { data } = usePublicSettings();
@@ -31,6 +46,7 @@ export function MainLayout() {
   const location = useLocation();
   const { data: settings } = usePublicSettings();
   useSmoothScroll();
+  useApiPreconnect();
 
   useEffect(() => {
     scrollToTop();
