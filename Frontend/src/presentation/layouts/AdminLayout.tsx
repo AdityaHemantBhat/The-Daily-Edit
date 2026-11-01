@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useAuth } from '../../application/state/authContext';
-import { Button, Spinner } from '../primitives';
+import { Spinner } from '../primitives';
 import { SITE_NAME } from '../../app/config/site';
 import { getAdminPath } from '../../app/config/adminPath';
 

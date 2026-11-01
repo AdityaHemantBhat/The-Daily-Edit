@@ -258,7 +258,7 @@ export function Header() {
   // The built-in /logo.svg duplicates the text wordmark — render it natively
   // with the site's real fonts instead of as an image. Custom uploads use the img.
   const useNativeWordmark = !logoUrl || logoUrl === '/logo.svg';
-  const [logoFailed, setLogoFailed] = useState(false);
+  const [logoFailed, setLogoFailed] = useState(false); // kept for future logo fallback logic
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const categories = data?.items ?? [];
