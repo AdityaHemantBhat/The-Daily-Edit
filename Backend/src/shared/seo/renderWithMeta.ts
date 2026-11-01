@@ -72,7 +72,9 @@ const SITE_NAME = 'The Daily Edit';
 export async function renderWithMeta(req: Request, res: Response, next: import('express').NextFunction) {
   try {
     const html = await template();
-    const url = `${env.SITE_URL.replace(/\/$/, '')}${req.path}`;
+    const host = req.get('host') ?? new URL(env.SITE_URL).host;
+    const protocol = req.protocol;
+    const url = `${protocol}://${host}${req.path}`;
     let tags = metaTags({ title: SITE_NAME, description: 'Technology, tools, and the ideas behind them — edited daily.', canonical: url, type: 'website' });
     let jsonLd: unknown[] = [];
 
