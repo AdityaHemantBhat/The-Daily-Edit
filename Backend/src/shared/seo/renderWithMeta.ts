@@ -13,12 +13,18 @@ const __dirname = path.dirname(__filename);
 let cachedTemplate: string | null = null;
 
 async function template(): Promise<string> {
-  if (!cachedTemplate) {
+  if (cachedTemplate) return cachedTemplate;
+  try {
     // Backend/src/shared/seo → repo root → Frontend/dist
     cachedTemplate = await fs.readFile(
       path.resolve(__dirname, '..', '..', '..', '..', 'Frontend', 'dist', 'index.html'),
       'utf8',
     );
+  } catch {
+    // Split deployment (frontend served separately): no Frontend/dist next to
+    // the backend. Serve a minimal shell that still carries the injected meta
+    // tags and bounces human visitors to the frontend origin.
+    cachedTemplate = `<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta http-equiv="refresh" content="0;url=${escapeXml(env.SITE_URL)}" /></head><body></body></html>`;
   }
   return cachedTemplate;
 }
